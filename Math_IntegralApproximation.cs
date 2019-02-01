@@ -18,45 +18,34 @@ class IntegralApproximationTesting {
       
         Console.WriteLine("Approximate the definite integral of f(x) = sin(x^2) from 0 to 1.5, where n = 4.");
       
-        // ------------------------------------------------------------
         // [EXAMPLE 1] Left Riemann Sum: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Riemann_Left(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
-        });
-        Console.WriteLine("1. Left Riemann Sum = " + result);
-        // ------------------------------------------------------------
+        }); Console.WriteLine("1. Left Riemann Sum = " + result); // <-- Display result
         
-        // ------------------------------------------------------------
+        
         // [EXAMPLE 2] Right Riemann Sum: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Riemann_Right(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
-        });
-        Console.WriteLine("2. Right Riemann Sum = " + result);
-        // ------------------------------------------------------------
-      
-        // ------------------------------------------------------------
+        }); Console.WriteLine("2. Right Riemann Sum = " + result); // <-- Display result
+        
+        
         // [EXAMPLE 3] Midpoint Rule: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Midpoint(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
-        });
-        Console.WriteLine("3. Midpoint Approx. = " + result);
-        // ------------------------------------------------------------
+        }); Console.WriteLine("3. Midpoint Approx. = " + result); // <-- Display result
         
-        // ------------------------------------------------------------
+        
         // [EXAMPLE 4] Midpoint Rule: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Trapezoidal(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
-        });
-        Console.WriteLine("4. Trapezoidal Approx. = " + result);
-        // ------------------------------------------------------------
+        }); Console.WriteLine("4. Trapezoidal Approx. = " + result); // <-- Display result
         
-        // ------------------------------------------------------------
+        
         // [EXAMPLE 5] Simpson's Rule: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Simpson(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
-        });
-        Console.WriteLine("5. Simpson's Approx. = " + result);
-        // ------------------------------------------------------------
+        }); Console.WriteLine("5. Simpson's Approx. = " + result); // <-- Display result
         
     }
     
