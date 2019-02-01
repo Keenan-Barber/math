@@ -31,7 +31,7 @@ class IntegralApproximationTesting {
         
         
         // [EXAMPLE 3] Midpoint Rule: of Sin(x^2) from 0 to 1.5, where n = 4
-        result = IntegralApprox_Midpoint(0.0, 1.5, 4, (double x) => {
+        result = IntegralApprox_Riemann_Mid(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
         }); Console.WriteLine("3. Midpoint Approx. = " + result); // <-- Display result
         
@@ -60,7 +60,7 @@ class IntegralApproximationTesting {
         double barWidth = ((max - min) / sections); // ---------- Width of each bar of approximation
 
         for (int i = 0; i < sections; i++) {
-            double xVal = (i * barWidth);
+            double xVal = (i * barWidth) + min;
             double yVal = func(xVal);
             approx += yVal;
         }
@@ -75,9 +75,9 @@ class IntegralApproximationTesting {
         if (sections <= 0 || func == null) { return 0.0; } // --- End if invalid data
         double approx = 0.0;
         double barWidth = ((max - min) / sections); // ---------- Width of each bar of approximation
-
+        
         for (int i = 1; i <= sections; i++) {
-            double xVal = (i * barWidth);
+            double xVal = (i * barWidth) + min;
             double yVal = func(xVal);
             approx += yVal;
         }
@@ -86,16 +86,16 @@ class IntegralApproximationTesting {
     }
     
     // -----------------------------------------------------
-    // Integral approximation using the midpoint rule       \
+    // Integral approximation using mid Riemann sum         \
     // ------------------------------------------------------
-    static double IntegralApprox_Midpoint(double min, double max, int sections, Function func) {
+    static double IntegralApprox_Riemann_Mid(double min, double max, int sections, Function func) {
         if (sections <= 0 || func == null) { return 0.0; } // --- End if invalid data
         double approx = 0.0;
         double barWidth = ((max - min) / sections); // ---------- Width of each bar of approximation
         double offsetToMidpoint = (barWidth / 2); // ------------ Offset to get 'midpoints' for bars
 
         for (int i = 0; i < sections; i++) {
-            double xVal = (i * barWidth) + offsetToMidpoint;
+            double xVal = (i * barWidth) + offsetToMidpoint + min;
             double yVal = func(xVal);
             approx += yVal;
         }
