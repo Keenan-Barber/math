@@ -1,4 +1,4 @@
-﻿
+
 // ------------------------------------------------------------
 // Author:  Keenan Barber
 // Date:    2/1/2019
@@ -8,7 +8,7 @@
 // ------------------------------------------------------------
 
 using System;
-class IntegralApproximation {
+class IntegralApproximationTesting {
     public delegate double Function(double input); // Callback to be used as a parameter
     
     static void Main() {
@@ -19,31 +19,82 @@ class IntegralApproximation {
         Console.WriteLine("Approximate the definite integral of f(x) = sin(x^2) from 0 to 1.5, where n = 4.");
       
         // ------------------------------------------------------------
-        // [EXAMPLE 1] Midpoint Rule: of Sin(x^2) from 0 to 1.5, where n = 4
+        // [EXAMPLE 1] Left Riemann Sum: of Sin(x^2) from 0 to 1.5, where n = 4
+        result = IntegralApprox_Riemann_Left(0.0, 1.5, 4, (double x) => {
+            return Math.Sin(x*x);
+        });
+        Console.WriteLine("1. Left Riemann Sum = " + result);
+        // ------------------------------------------------------------
+        
+        // ------------------------------------------------------------
+        // [EXAMPLE 2] Right Riemann Sum: of Sin(x^2) from 0 to 1.5, where n = 4
+        result = IntegralApprox_Riemann_Right(0.0, 1.5, 4, (double x) => {
+            return Math.Sin(x*x);
+        });
+        Console.WriteLine("2. Right Riemann Sum = " + result);
+        // ------------------------------------------------------------
+      
+        // ------------------------------------------------------------
+        // [EXAMPLE 3] Midpoint Rule: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Midpoint(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
         });
-        Console.WriteLine("1. Midpoint Approx. = " + result);
+        Console.WriteLine("3. Midpoint Approx. = " + result);
         // ------------------------------------------------------------
         
         // ------------------------------------------------------------
-        // [EXAMPLE 2] Midpoint Rule: of Sin(x^2) from 0 to 1.5, where n = 4
+        // [EXAMPLE 4] Midpoint Rule: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Trapezoidal(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
         });
-        Console.WriteLine("2. Trapezoidal Approx. = " + result);
+        Console.WriteLine("4. Trapezoidal Approx. = " + result);
         // ------------------------------------------------------------
         
         // ------------------------------------------------------------
-        // [EXAMPLE 3] Simpson's Rule: of Sin(x^2) from 0 to 1.5, where n = 4
+        // [EXAMPLE 5] Simpson's Rule: of Sin(x^2) from 0 to 1.5, where n = 4
         result = IntegralApprox_Simpson(0.0, 1.5, 4, (double x) => {
             return Math.Sin(x*x);
         });
-        Console.WriteLine("3. Simpson's Approx. = " + result);
+        Console.WriteLine("5. Simpson's Approx. = " + result);
         // ------------------------------------------------------------
         
     }
     
+    
+    
+    // -----------------------------------------------------
+    // Integral approximation using left Riemann sum        \
+    // ------------------------------------------------------
+    static double IntegralApprox_Riemann_Left(double min, double max, int sections, Function func) {
+        if (sections <= 0 || func == null) { return 0.0; } // --- End if invalid data
+        double approx = 0.0;
+        double barWidth = ((max - min) / sections); // ---------- Width of each bar of approximation
+
+        for (int i = 0; i < sections; i++) {
+            double xVal = (i * barWidth);
+            double yVal = func(xVal);
+            approx += yVal;
+        }
+        approx *= barWidth;
+        return approx;
+    }
+    
+    // -----------------------------------------------------
+    // Integral approximation using right Riemann sum       \
+    // ------------------------------------------------------
+    static double IntegralApprox_Riemann_Right(double min, double max, int sections, Function func) {
+        if (sections <= 0 || func == null) { return 0.0; } // --- End if invalid data
+        double approx = 0.0;
+        double barWidth = ((max - min) / sections); // ---------- Width of each bar of approximation
+
+        for (int i = 1; i <= sections; i++) {
+            double xVal = (i * barWidth);
+            double yVal = func(xVal);
+            approx += yVal;
+        }
+        approx *= barWidth;
+        return approx;
+    }
     
     // -----------------------------------------------------
     // Integral approximation using the midpoint rule       \
